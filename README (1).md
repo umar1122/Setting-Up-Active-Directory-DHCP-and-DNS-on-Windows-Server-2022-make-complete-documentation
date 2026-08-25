@@ -30,7 +30,7 @@ This is written the way I'd explain it to a friend, not copied from a manual. If
 - A second machine (Windows 10/11) to test joining the domain later — optional but recommended
 
 
-## Understanding the Three Pieces (In Plain English)
+## Understanding the Three Pieces
 
 Before touching the server, here's what each service actually does:
 

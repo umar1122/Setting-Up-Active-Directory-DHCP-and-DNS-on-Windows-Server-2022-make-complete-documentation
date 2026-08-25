@@ -1,4 +1,4 @@
-# Setting Up Active Directory, DHCP, and DNS on Windows Server 2022
+# Setting Up Active Directory, DHCP, and DNS on Windows Server 2022 
 
 A complete, beginner-friendly walkthrough for building a working Windows Server 2022 lab with Active Directory Domain Services,  DNS, and DHCP from a blank server to a client machine successfully joining the domain.
 

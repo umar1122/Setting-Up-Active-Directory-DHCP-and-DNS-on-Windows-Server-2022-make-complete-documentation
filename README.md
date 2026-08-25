@@ -77,7 +77,7 @@ The lab is being expanded gradually to include **network monitoring, firewall co
 | DNS                      | Name resolution and AD support          |
 | DHCP                     | Automatic IP address configuration      |
 | Windows Client 1         | Domain/network client                   |
-| Windows Client 2         | Domain/network client                   |
+                
 
 ---
 
@@ -91,7 +91,6 @@ The switch provides physical connectivity between:
 
 * The laptop hosting the virtual server
 * Windows Client 1
-* Windows Client 2
 
 This allows me to work with a physical network rather than using only an isolated virtual network.
 

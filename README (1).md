@@ -4,9 +4,8 @@ A complete, beginner-friendly walkthrough for building a working Windows Server 
 
 This is written the way I'd explain it to a friend, not copied from a manual. If you're studying for a certification, building a home lab, or just trying to understand how a real Windows domain environment works, this should get you there.
 
-![Network Topology](images/01-network-topology.png)
 
----
+
 
 ## Table of Contents
 
@@ -20,7 +19,7 @@ This is written the way I'd explain it to a friend, not copied from a manual. If
 - [Common Issues and Fixes](#common-issues-and-fixes)
 - [Next Steps](#next-steps)
 
----
+
 
 ## What You'll Need Before Starting
 
@@ -42,7 +41,7 @@ Before touching the server, here's what each service actually does:
 
 **DHCP (Dynamic Host Configuration Protocol)** — Automatically hands out IP addresses to devices on the network, so you don't have to manually configure every machine by hand.
 
----
+
 
 ## Part 1: Setting a Static IP Address
 
@@ -59,14 +58,9 @@ Before installing anything, your server needs a fixed IP address.
 
 Click **OK** and close out.
 
-> 📸 **Add your screenshot here:** the TCP/IPv4 Properties window with your static IP filled in.
-> `images/screenshots/01-static-ip.png`
 
----
 
 ## Part 2: Installing Active Directory Domain Services (AD DS)
-
-![AD DS Setup Flow](images/02-ad-ds-promotion-flow.png)
 
 ### Step 1: Open Server Manager
 
@@ -80,9 +74,6 @@ Server Manager should open automatically when you log in. If not, click the icon
 4. A popup will ask to add required features — click **Add Features**
 5. Click **Next** through the remaining screens, then click **Install**
 6. Wait for the installation to finish (usually a few minutes), then click **Close**
-
-> 📸 **Add your screenshot here:** the Server Roles selection screen with AD DS checked.
-> `images/screenshots/02-add-ad-ds-role.png`
 
 ### Step 3: Promote the Server to a Domain Controller
 
@@ -102,10 +93,6 @@ Installing the role isn't enough — you now need to actually promote the server
 
 The server will automatically restart once this is complete. When it comes back up, you'll now be logging in as a **domain administrator** instead of just a local admin.
 
-> 📸 **Add your screenshot here:** the Deployment Configuration screen showing "Add a new forest."
-> `images/screenshots/03-promote-domain-controller.png`
-
----
 
 ## Part 3: Verifying Active Directory and DNS
 
@@ -115,16 +102,9 @@ Since DNS installs automatically alongside AD DS, let's confirm everything is wo
 2. Expand your server name, then expand **Forward Lookup Zones**
 3. You should see a zone matching your domain name (e.g., `mycompany.local`) with some auto-created records inside it
 
-![DNS Zone Structure](images/04-dns-zone-structure.png)
-
 If you see that zone with records, DNS is working correctly.
 
 You can also open **Tools > Active Directory Users and Computers** to confirm your domain structure is visible, with folders like Users, Computers, and Domain Controllers.
-
-> 📸 **Add your screenshot here:** the DNS console showing your Forward Lookup Zone.
-> `images/screenshots/04-dns-forward-lookup-zone.png`
-
----
 
 ## Part 4: Installing and Configuring DHCP
 
@@ -149,8 +129,6 @@ This step authorizes the DHCP server in Active Directory, which is required befo
 
 A "scope" is just the range of IP addresses DHCP is allowed to give out.
 
-![DHCP Scope Range](images/03-dhcp-scope-range.png)
-
 1. Open **Server Manager > Tools > DHCP**
 2. Expand your server, right-click **IPv4**, and choose **New Scope**
 3. Click **Next** on the wizard welcome screen
@@ -168,12 +146,9 @@ A "scope" is just the range of IP addresses DHCP is allowed to give out.
 12. Choose **Yes, I want to activate this scope now**
 13. Click **Finish**
 
-> 📸 **Add your screenshot here:** the New Scope Wizard showing your IP range.
-> `images/screenshots/05-dhcp-new-scope.png`
-
 Your DHCP server is now live and ready to assign IP addresses.
 
----
+
 
 ## Part 5: Testing Everything Together
 
@@ -185,8 +160,7 @@ Your DHCP server is now live and ready to assign IP addresses.
    ```
 4. You should see an IP address from the range you configured (e.g., `192.168.1.101`), along with the correct DNS server and gateway
 
-> 📸 **Add your screenshot here:** the `ipconfig /all` output on the client machine.
-> `images/screenshots/06-ipconfig-client.png`
+
 
 To test the domain join:
 
@@ -197,10 +171,7 @@ To test the domain join:
 
 If the machine successfully joins and shows up under **Computers** in Active Directory Users and Computers, everything is working as it should.
 
-> 📸 **Add your screenshot here:** the "Welcome to the mycompany.local domain" confirmation dialog.
-> `images/screenshots/07-domain-join-success.png`
 
----
 
 ## Common Issues and Fixes
 
@@ -216,7 +187,7 @@ Confirm the client machine's DNS setting points to your AD server's IP, not your
 **"The following error occurred attempting to join the domain" errors**
 This is almost always a DNS or connectivity issue. Ping the domain controller by name and by IP from the client to narrow down where the problem is.
 
----
+
 
 ## Next Steps
 
@@ -229,12 +200,9 @@ Good next steps to explore:
 - Configuring DNS forwarders for internet name resolution
 - Hardening security with fine-grained password policies
 
----
+
 
 ## Contributing
 
 Found an error or want to add screenshots from your own setup? Pull requests are welcome.
 
-## License
-
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.

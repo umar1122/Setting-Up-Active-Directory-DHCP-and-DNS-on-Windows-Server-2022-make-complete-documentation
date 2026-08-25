@@ -19,7 +19,7 @@ The current lab consists of:
 * Active Directory Domain Services (AD DS)
 * DNS Server
 * DHCP Server
-* Two physical Windows client machines connected directly to the switch
+* Two physical Windows machines connected directly to the switch
 
 The physical clients communicate through the switch with the Windows Server virtual machine hosted on the laptop.
 

@@ -1,6 +1,6 @@
 # Active Directory Home Lab
 
-A home lab built in Hyper-V where I set up a working Active Directory environment from the ground up — domain controller, DNS, DHCP, organizational units, and a domain-joined client.
+A home lab built in Hyper-V where I set up a working Active Directory environment from the ground up domain controller, DNS, DHCP, organizational units, and a domain-joined client.
 
 ## Overview
 
@@ -56,10 +56,10 @@ Full step-by-step writeup with details and reasoning: [active-directory-homelab.
 
 ## Next Steps
 
-- [ ] Add a second domain controller for redundancy
-- [ ] Configure Group Policy Objects
-- [ ] Expand OU structure and add more security groups
-- [ ] Set up DHCP failover
+[1] Add a second domain controller for redundancy
+[2] Configure Group Policy Objects
+[3] Expand OU structure and add more security groups
+[4] Set up DHCP failover
 
 ---
-*Home lab project — built for learning, not production use.*
+*Home lab project :- built for learning, not production use.*

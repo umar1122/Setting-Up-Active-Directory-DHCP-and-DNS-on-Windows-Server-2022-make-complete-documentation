@@ -28,7 +28,7 @@ Before touching Active Directory:
 
 - Deployed Windows Server 2022
 - Renamed the machine to `DC01`
-- Set a static IP (`192.168.0.1`) — a domain controller should never be on DHCP
+- Set a static IP (`192.168.0.1`)  a domain controller should never be on DHCP
 
 ## 2. Install the AD DS role
 
@@ -37,7 +37,7 @@ From Server Manager → **Add Roles and Features** → picked a role-based insta
 A few things worth noting from this step:
 
 - It also pulls in the Group Policy Management tools automatically
-- It warned me that DNS isn't installed yet — I let it install DNS at the same time instead of doing it separately
+- It warned me that DNS isn't installed yet. I let it install DNS at the same time instead of doing it separately
 - Installing the role itself doesn't create the domain yet, it just adds the software. The actual domain gets created in the next step (post-deployment configuration)
 - This role **does require a restart** later, unlike DHCP/DNS role installs which don't
 
@@ -52,7 +52,7 @@ Other choices made during the wizard:
 - Kept the default forest/domain functional level (didn't downgrade for old Windows Server 2008 compatibility since I don't need it)
 - This DC also became the DNS server and holds the Global Catalog
 - Set a Directory Services Restore Mode (DSRM) password
-- Changed the auto-generated NetBIOS name from `INT` to `ACME` — this is what shows up in the login screen for users, and `INT` alone would've been confusing
+- Changed the auto-generated NetBIOS name from `INT` to `ACME`. this is what shows up in the login screen for users, and `INT` alone would've been confusing
 - Let it use default file paths for the AD database
 - Ran through the prerequisite checks (a couple of yellow warnings, nothing blocking) and hit install
 
@@ -63,7 +63,7 @@ The install finishes with a reboot — this is the restart mentioned earlier.
 Once the server came back up, I confirmed AD had built out DNS automatically:
 
 - Forward lookup zone for `int.acme.com` was already there, including the A record for DC01
-- **Reverse lookup zone was missing** — AD doesn't create this for you, so I added it manually:
+- **Reverse lookup zone was missing**. AD doesn't create this for you, so I added it manually:
   - New Zone → Primary zone → Reverse lookup zone
   - Replication scope set to replicate to all DNS servers running on domain controllers in the domain (useful later if I add a second DC)
   - Network: `192.168.0.0/24`
@@ -72,19 +72,19 @@ Once the server came back up, I confirmed AD had built out DNS automatically:
 
 ## 5. Install DHCP
 
-Added the DHCP role the same way as AD DS (Server Manager → Add Roles). After install, DHCP needs to be authorized against Active Directory — it asked to use the domain admin account for this, which I approved.
+Added the DHCP role the same way as AD DS (Server Manager → Add Roles). After install, DHCP needs to be authorized against Active Directory. it asked to use the domain admin account for this, which I approved.
 
 Created a scope:
 
 - Name: `ACME IPv4`
-- Range: `192.168.0.50` – `192.168.0.200` (plenty for a lab)
+- Range: `192.168.0.50` . `192.168.0.200` (plenty for a lab)
 - Subnet mask: `255.255.255.0`
 - Default gateway handed out: `192.168.0.254`
-- DNS server handed out: `192.168.0.1` (DC01) — the wizard actually detected the domain and suggested this automatically
+- DNS server handed out: `192.168.0.1` (DC01). the wizard actually detected the domain and suggested this automatically
 - No WINS
 - Activated the scope
 
-Tested it from PC01 — it picked up `192.168.0.50` from DHCP right away.
+Tested it from PC01. it picked up `192.168.0.50` from DHCP right away.
 
 ## 6. Build an OU structure
 
@@ -97,7 +97,7 @@ int.acme.com
     └── Staff (OU)
 ```
 
-When creating each OU, I unchecked **"Protect container from accidental deletion"** — it's easier to work with while you're still shaping the lab. In a real production environment you'd want to leave that protection on.
+When creating each OU, I unchecked **"Protect container from accidental deletion"**. it's easier to work with while you're still shaping the lab. In a real production environment you'd want to leave that protection on.
 
 Also worth noting: the built-in **Computers** container already had `PC01` sitting in it automatically once I joined that machine to the domain (see step 7).
 
@@ -105,8 +105,8 @@ Also worth noting: the built-in **Computers** container already had `PC01` sitti
 
 Created two test accounts:
 
-- **troy** — placed in the `IT` OU, logon name `tberg`, added to the **Domain Admins** group so this account can be used for admin tasks instead of logging in as the built-in `administrator` account
-- **batman** — placed in the `Staff` OU, logon name `bman`, left "user must change password at next logon" checked
+- **troy**  placed in the `IT` OU, logon name `tberg`, added to the **Domain Admins** group so this account can be used for admin tasks instead of logging in as the built-in `administrator` account
+- **batman**  placed in the `Staff` OU, logon name `bman`, left "user must change password at next logon" checked
 
 ## 8. Join the client PC to the domain
 
@@ -122,8 +122,8 @@ After the reboot, the login screen let me log in as a domain user instead of jus
 
 ## 9. Test everything
 
-- Logged into PC01 as `tberg` — authenticated successfully against DC01. Ran `query user` to confirm the session was recognized as a domain login.
-- Logged in as `bman` — was prompted to change the password on first login as expected, then landed on a fresh profile.
+- Logged into PC01 as `tberg` authenticated successfully against DC01. Ran `query user` to confirm the session was recognized as a domain login.
+- Logged in as `bman` was prompted to change the password on first login as expected, then landed on a fresh profile.
 
 Both logins were authenticated by DC01, confirming AD, DNS, and DHCP were all working together correctly.
 

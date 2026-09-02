@@ -56,10 +56,10 @@ Full step-by-step writeup with details and reasoning: [active-directory-homelab.
 
 ## Next Steps
 
-[1] Add a second domain controller for redundancy
-[2] Configure Group Policy Objects
-[3] Expand OU structure and add more security groups
-[4] Set up DHCP failover
+- [1] Add a second domain controller for redundancy
+- [2] Configure Group Policy Objects
+- [3] Expand OU structure and add more security groups
+- [4] Set up DHCP failover
 
 ---
 *Home lab project :- built for learning, not production use.*
